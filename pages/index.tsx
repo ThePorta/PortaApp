@@ -1,12 +1,22 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import Link from 'next/link';
 import Image from 'next/image'
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import { SignMessage } from '../components/SignMessage';
+import { SocialConnect } from '../components/SocialConnect';
+
 
 const Home: NextPage = () => {
+  const { isConnected } = useAccount()
+  const { connect, connectors, error, isLoading, pendingConnector } =
+    useConnect()
+  const { disconnect } = useDisconnect()
+
   return (
-    <div className={styles.container}>
+    <div className={styles.socialcontainer}>
       <Head>
         <title>Porta App</title>
         <meta
@@ -17,22 +27,37 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href=""> </a>
-          <Image
-              src="/porta-logo.png"
-              alt="Porta Logo"
-              width={213}
-              height={87.5}
-            />
-        </h1>
+        {!isConnected &&
+          <h1 className={styles.title}>
+          Welcome to
+            <Image
+                src="/porta-logo.png"
+                alt="Porta Logo"
+                width={213}
+                height={87.5}
+              />
+          </h1>
+        }
+        {isConnected &&
+          <h1 className={styles.title}>
+            <Image
+                src="/porta-logo.png"
+                alt="Porta Logo"
+                width={213}
+                height={87.5}
+              />
+          </h1>
+        }
 
-        <p className={styles.description}>
-          Get started connecting your wallet!
-        </p>
+        {!isConnected &&
+            <p className={styles.description}>
+              Get started connecting your wallet!
+            </p>
+        }
 
         <ConnectButton />
    
+        { isConnected &&  <SocialConnect />}
       </main>
 
       <footer className={styles.footer}>

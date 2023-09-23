@@ -2,6 +2,10 @@
   padding: 0 2rem;
 }
 
+.socialcontainer {
+  padding: 2rem;
+}
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;
@@ -19,6 +23,11 @@
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
 .footer a {
@@ -56,10 +65,25 @@
   font-size: 1.5rem;
 }
 
+.subscription {
+  margin: 1rem;
+  line-height: 1.5;
+  /* font-size: 1.5rem; */
+}
+
 .grid {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+
+.social {
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   max-width: 800px;
 }
