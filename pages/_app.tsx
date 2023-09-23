@@ -14,6 +14,7 @@ import {
 } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 
+const WALLET_CONNECT_PROJECT_ID = "4ac88d7b3f662430f6489c5653533ac9";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     mainnet,
@@ -28,8 +29,8 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
+  appName: 'Porta',
+  projectId: WALLET_CONNECT_PROJECT_ID,
   chains,
 });
 
