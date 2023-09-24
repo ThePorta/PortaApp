@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
@@ -15,8 +16,9 @@ function SubmitTx() {
 
   const [inputData, setInputData] = useState(undefined);
   const [targetContract, setTargetContract] = useState(undefined);
+  const [error, setError] = useState(undefined);
 
-  let { data, sendTransaction, isLoading, isSuccess  } =
+  const { data, sendTransaction, isLoading, isSuccess  } =
   useSendTransaction({
     account: address,
     to: targetContract,
@@ -25,16 +27,18 @@ function SubmitTx() {
   })
 
   useEffect(() => {
+
     const url = `http://localhost:1234/getInputData?uuid=${uuid}`;
 
     axios
       .get(url)
       .then((response) => {
-        const { accountAddress, targetContract, inputData, chainId, chainName } = response.data;
+        const { targetContract, inputData, chainId, chainName } = response.data;
         setTargetContract(targetContract);
         setInputData(inputData);
       })
       .catch((error) => {
+        setError(`${error}`)
         console.error('Error fetching data:', error);
       });
   }, [address, targetContract, inputData]);
@@ -54,13 +58,16 @@ function SubmitTx() {
             height={87.5}
             />
     </Link>
+    <ConnectButton />
       <div className={styles.card}>
+        <div className={styles.boldTitle}>UUID:</div>
+        <div>{uuid || ""}</div>
         <div className={styles.boldTitle}>Data:</div>
         <div>{inputData}</div>
         <div className={styles.boldTitle}>Target:</div>
         <div>{targetContract}</div>
-        <div className={styles.boldTitle}>Address:</div>
-        <div>{address}</div>
+        {/* <div className={styles.boldTitle}>Address:</div> */}
+        {/* <div>{address}</div> */}
       </div>
       <Button variant="outline-primary" disabled={isLoading || !sendTransaction} onClick={confirm}>
         {isLoading ? 'Sending...' : 'Confirm Transaction'}
@@ -72,6 +79,11 @@ function SubmitTx() {
           <div>
             <a href={`https://etherscan.io/tx/${data?.hash}`}>Etherscan</a>
           </div>
+        </div>
+      )}
+      {error && (
+        <div>
+          {error}
         </div>
       )}
     </div>
