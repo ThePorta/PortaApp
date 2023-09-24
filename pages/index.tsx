@@ -1,19 +1,36 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
-import Link from 'next/link';
 import Image from 'next/image'
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { SignMessage } from '../components/SignMessage';
 import { SocialConnect } from '../components/SocialConnect';
+import { useState, useEffect } from 'react';
+
+// Server Component:
 
 
 const Home: NextPage = () => {
+
   const { isConnected } = useAccount()
   const { connect, connectors, error, isLoading, pendingConnector } =
     useConnect()
-  const { disconnect } = useDisconnect()
+  const { disconnect } = useDisconnect({
+    onSuccess(data) {
+      console.log('Success', data)
+      // Clear local storage
+      localStorage.clear();
+
+      // Clear session storage
+      sessionStorage.clear();
+    },
+  })
+  const [domLoaded, setDomLoaded] = useState(false);
+
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
 
   return (
     <div className={styles.socialcontainer}>
@@ -25,46 +42,52 @@ const Home: NextPage = () => {
         />
         <link href="/favicon.ico" rel="icon" />
       </Head>
+      {domLoaded && (
 
       <main className={styles.main}>
         {!isConnected &&
           <h1 className={styles.title}>
           Welcome to
+          <Link href="/">
             <Image
                 src="/porta-logo.png"
                 alt="Porta Logo"
                 width={213}
                 height={87.5}
               />
+          </Link>
           </h1>
         }
         {isConnected &&
-          <h1 className={styles.title}>
+          <Link href="/">
             <Image
                 src="/porta-logo.png"
                 alt="Porta Logo"
                 width={213}
                 height={87.5}
               />
-          </h1>
+          </Link>
         }
 
         {!isConnected &&
-            <p className={styles.description}>
-              Get started connecting your wallet!
-            </p>
+          <p className={styles.description}>
+            Get started connecting your wallet!
+          </p>
         }
 
         <ConnectButton />
-   
-        { isConnected &&  <SocialConnect />}
+        {isConnected &&
+        <div className={styles.socialBotSubscription}>
+          Social Bot Subscription
+        </div>
+        }
+        { isConnected &&  <SocialConnect platform="telegram" botId="1" name="Crypto Pulse" isConnected={true}/>}
+        { isConnected &&  <SocialConnect platform="telegram" botId="2" name="Trendy Coin" isConnected={false}/>}
+        {/* <Link href="/submitTx?uuid=34f49b2b-08f3-41ba-b327-7785eabb542f">
+          <h1>Test Transaction</h1>
+        </Link> */}
       </main>
-
-      <footer className={styles.footer}>
-        <a href="" rel="noopener noreferrer" target="_blank">
-          Made with ❤️ by Asa
-        </a>
-      </footer>
+      )}
     </div>
   );
 };

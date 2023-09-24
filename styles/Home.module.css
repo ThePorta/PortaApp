@@ -60,9 +60,25 @@
 }
 
 .description {
-  margin: 0 0 2rem;
+  margin-bottom: 3rem;
   line-height: 1.5;
   font-size: 1.5rem;
+}
+
+.socialBotSubscription {
+  margin: 2rem;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
+.socialBot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.socialCol {
+  width: 300px;
+  flex: 1
 }
 
 .subscription {
@@ -97,14 +113,25 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 350px;
+  width: 500px;
+  overflow-wrap: break-word;
 }
 
-.card:hover,
+.card.disabled {
+  pointer-events: none;
+  color: #666; /* Set the disabled text color */
+  border-color: #ccc; /* Set the disabled border color */
+}
+
+/* .card:hover,
 .card:focus,
 .card:active {
   color: #0d76fc;
   border-color: #0d76fc;
+} */
+
+.boldTitle {
+  font-weight: bold;
 }
 
 .card h2 {
