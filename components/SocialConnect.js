@@ -42,7 +42,7 @@ export function SocialConnect({ platform, botId, name, isConnected }) {
             })
             setIsTelegramConnected(true)
             setIsSignedMessageVisible(false)
-            const url = `http://192.168.86.110:1234/setChatId`;
+            const url = `http://localhost:1234/setChatId`;
             const data = {
                 otp,
                 address

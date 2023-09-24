@@ -25,7 +25,7 @@ function SubmitTx() {
   })
 
   useEffect(() => {
-    const url = `http://192.168.86.108:1234/getInputData?uuid=${uuid}`;
+    const url = `http://localhost:1234/getInputData?uuid=${uuid}`;
 
     axios
       .get(url)
