@@ -16,7 +16,7 @@ function SubmitTx() {
 
   const [inputData, setInputData] = useState(undefined);
   const [targetContract, setTargetContract] = useState(undefined);
-  const [error, setError] = useState(undefined);
+  const [error, setError] = useState("");
 
   const { data, sendTransaction, isLoading, isSuccess  } =
   useSendTransaction({
@@ -36,12 +36,13 @@ function SubmitTx() {
         const { targetContract, inputData, chainId, chainName } = response.data;
         setTargetContract(targetContract);
         setInputData(inputData);
+        setError("")
       })
       .catch((error) => {
-        setError(`${error}`)
+        setError(`url: ${url} ${error}`)
         console.error('Error fetching data:', error);
       });
-  }, [address, targetContract, inputData]);
+  }, [uuid]);
 
   const confirm = () => {
     console.log(`sendTransaction = ${sendTransaction}`)
