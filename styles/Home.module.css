@@ -123,6 +123,22 @@
   border-color: #ccc; /* Set the disabled border color */
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: row; /* Arrange elements horizontally */
+  align-items: center; /* Vertically center elements */
+}
+
+.inputBox {
+  width: 100px;
+  padding: 5px;
+  margin-right: 5px; /* Add spacing between input and button */
+}
+
+.submitButton {
+  padding: 5px 10px;
+}
+
 /* .card:hover,
 .card:focus,
 .card:active {

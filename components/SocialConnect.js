@@ -102,35 +102,36 @@ export function SocialConnect({ platform, botId, name, isConnected }) {
                 {!isSignedMessageVisible && (<Button variant="primary" onClick={handleTelegramConnect}>
                     Subscribe
                 </Button>)}
-            </div>
-        }
-        { (!isTelegramConnected && isSignedMessageVisible) &&
-            <form
-            onSubmit={(event) => {
-            event.preventDefault()
-            event.message
-            signTypedData(event.message)
-            }}
-        >
-            <input
-                id="message"
-                name="message"
-                className="form-control"
-                placeholder="Enter OTP"
-            />
-            <button class="btn btn-primary" disabled={isLoading}>
-            {isLoading ? 'Check Wallet' : 'Sign Message'}
-            </button>
+                { (!isTelegramConnected && isSignedMessageVisible) &&
+                    <form
+                    className={styles.formContainer}
+                    onSubmit={(event) => {
+                    event.preventDefault()
+                    event.message
+                    signTypedData(event.message)
+                    }}
+                >
+                    <input
+                        id="message"
+                        name="message"
+                        className={`${styles.inputBox} form-control`}
+                        placeholder="Enter OTP"
+                    />
+                    <button class={`btn btn-primary ${styles.submitButton}`} disabled={isLoading}>
+                    {isLoading ? 'Check Wallet' : 'Sign Message'}
+                    </button>
 
-            {signMessageData && (
-            <div>
-                <div>Recovered Address: {recoveredAddress.current}</div>
-                <div>Signature: {signMessageData}</div>
-            </div>
-            )}
+                    {signMessageData && (
+                    <div>
+                        <div>Recovered Address: {recoveredAddress.current}</div>
+                        <div>Signature: {signMessageData}</div>
+                    </div>
+                    )}
 
-            {error && <div>{error.message}</div>}
-        </form>
+                    {error && <div>{error.message}</div>}
+                </form>
+                }
+            </div>
         }
         </div>
     );
