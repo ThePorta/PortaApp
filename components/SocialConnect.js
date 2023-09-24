@@ -71,7 +71,7 @@ export function SocialConnect({ platform, botId, name, isConnected }) {
     const [isTelegramOPTValid, setIsTelegramOPTValid] = useState(false);
     const [isSignedMessageVisible, setIsSignedMessageVisible] = useState(false);
     const handleTelegramConnect = () => {
-        window.open('https://t.me/porta_eth_bot', '_blank');
+        window.open('https://t.me/signalBuy_bot', '_blank');
         setIsSignedMessageVisible(true);
         setTelegramConnectStatus("VERIFING_OTP");
     };
