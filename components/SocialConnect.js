@@ -63,7 +63,7 @@ export function SocialConnect({ platform, botId, name, url, isConnected }) {
               });
         }
         })()
-    }, [signMessageData])
+    }, [signMessageData, otp, address])
 
     const [isTelegramConnected, setIsTelegramConnected] = useState(isConnected);
     // NOT_CONNECTED, VERIFING_OTP, REQUEST_USER_SIGNATURE, CONNECTED
