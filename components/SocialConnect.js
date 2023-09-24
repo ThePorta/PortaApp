@@ -121,7 +121,7 @@ export function SocialConnect({ platform, botId, name, url, isConnected }) {
                         placeholder="Enter OTP"
                     />
                     <button class={`btn btn-primary ${styles.submitButton}`} disabled={isLoading}>
-                    {isLoading ? 'Check Wallet' : 'Sign Message'}
+                    {isLoading ? 'Check Wallet' : 'Confirm Subscription'}
                     </button>
 
                     {signMessageData && (
