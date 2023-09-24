@@ -81,8 +81,8 @@ const Home: NextPage = () => {
           Social Bot Subscription
         </div>
         }
-        { isConnected &&  <SocialConnect platform="telegram" botId="1" name="Crypto Pulse" isConnected={true}/>}
-        { isConnected &&  <SocialConnect platform="telegram" botId="2" name="Trendy Coin" isConnected={false}/>}
+        { isConnected &&  <SocialConnect platform="telegram" botId="1" name="Porta ETH Bot" url={`t.me/porta_eth_bot`} isConnected={false}/>}
+        { isConnected &&  <SocialConnect platform="telegram" botId="2" name="Signal Buy Bot" url={`t.me/signalBuy_bot`} isConnected={false}/>}
         {/* <Link href="/submitTx?uuid=34f49b2b-08f3-41ba-b327-7785eabb542f">
           <h1>Test Transaction</h1>
         </Link> */}
