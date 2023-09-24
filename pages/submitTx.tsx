@@ -67,8 +67,6 @@ function SubmitTx() {
         <div>{inputData}</div>
         <div className={styles.boldTitle}>Target:</div>
         <div>{targetContract}</div>
-        {/* <div className={styles.boldTitle}>Address:</div> */}
-        {/* <div>{address}</div> */}
       </div>
       <Button variant="outline-primary" disabled={isLoading || !sendTransaction} onClick={confirm}>
         {isLoading ? 'Sending...' : 'Confirm Transaction'}

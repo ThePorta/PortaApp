@@ -31,7 +31,7 @@ export function SocialConnect({ platform, botId, name, url, isConnected }) {
         ],
       },
     })
-    const [otp, setOTP] = useState('777261');
+    const [otp, setOTP] = useState('');
 
     useEffect(() => {
         (async () => {
@@ -57,6 +57,7 @@ export function SocialConnect({ platform, botId, name, url, isConnected }) {
                   console.log('Response:', response.data);
                   setIsTelegramConnected(true)
                   setIsSignedMessageVisible(false)
+                  input.value = ""
               })
               .catch((error) => {
                 console.error('Error fetching data:', error);
@@ -74,8 +75,10 @@ export function SocialConnect({ platform, botId, name, url, isConnected }) {
         window.open(`https://${url}`, '_blank');
         setIsSignedMessageVisible(true);
         setTelegramConnectStatus("VERIFING_OTP");
+
     };
 
+    let input;
     const handleSignTypedData = (otp) => {
         setOTP(otp)
         signTypedData()
@@ -107,12 +110,12 @@ export function SocialConnect({ platform, botId, name, url, isConnected }) {
                     className={styles.formContainer}
                     onSubmit={(event) => {
                     event.preventDefault()
-                    event.message
-                    signTypedData(event.message)
+                    handleSignTypedData(input.value)
                     }}
                 >
                     <input
                         id="message"
+                        ref={node => (input = node)}
                         name="message"
                         className={`${styles.inputBox} form-control`}
                         placeholder="Enter OTP"
